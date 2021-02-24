@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 设置Dubbo服务名称 -->
+    <dubbo:application name="consumer" />
+
+    <!-- 设置注册中心地址 -->
+    <dubbo:registry address="zookeeper://localhost:2181" />
+
+    <!-- 设置通信协议 -->
+    <dubbo:protocol name="dubbo" port="20880" />
+
+    <!-- 表示引用一个服务，其中 id 表示该服务的唯一标识，
+         可以用该 id 实现 IOC 注入，interface 表示引用的服务接口。 -->
+    <!-- 将UserService注入进来 -->
+    <dubbo:reference id="userService" check="false" interface="com.yqx.common.service.UserService" />
+
+    <!-- 重点在这里, 一定要放到 SpringMVC 容器的配置文件中
+         扫描Controller包 -->
+    <dubbo:annotation package="com.yqx.consumer.controller"/>
+
+</beans>

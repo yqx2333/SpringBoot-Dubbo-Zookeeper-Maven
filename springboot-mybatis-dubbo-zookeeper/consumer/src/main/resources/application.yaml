@@ -1,0 +1,10 @@
+server:
+  port: 9998
+
+spring:
+  datasource:    # 数据库连接依赖
+    # name: text    # spring.datasource.name指定数据源名.
+    url: jdbc:mysql://localhost:3306/yqx?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver

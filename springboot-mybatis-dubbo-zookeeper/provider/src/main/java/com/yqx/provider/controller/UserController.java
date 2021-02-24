@@ -17,7 +17,7 @@ public class UserController {
 
     // 测试方法 测试成功
     @GetMapping( "/text" )
-    public User text(){
+    public User findUser(){
         User user = userService.findUser();
         return user;
     }
