@@ -36,4 +36,14 @@ public class UserServiceImpl implements UserService {
         return userMapper.findUserAll();
     }
 
+    /**
+     * 根据UserID查询单个User信息
+     * 主要测试TK包下的Mapper是否能够使用
+     * @return
+     */
+    @Override
+    public List<User> findUsers() {
+        return userMapper.selectAll();
+    }
+
 }

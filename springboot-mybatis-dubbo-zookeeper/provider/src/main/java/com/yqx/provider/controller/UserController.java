@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping( "/user" )
 @RestController // 返回Json字符串
 public class UserController {
 
@@ -15,16 +16,35 @@ public class UserController {
     public UserService userService;
 
     // 测试方法 测试成功
-    @GetMapping( "/user/text" )
+    @GetMapping( "/text" )
     public User text(){
         User user = userService.findUser();
         return user;
     }
 
-
-    @RequestMapping( "/user/findUserAll" )
+    /**
+     * 连接数据库 查询User表中所有的信息
+     * 测试成功!
+     * @return
+     */
+    @RequestMapping( "/findUserAll" )
     public List<User> findUserAll(){
         return userService.findUserAll();
+    }
+
+    /**
+     * 根据参数id查询User信息
+     * 主要测试tk包下的mapper是否能够正常使用
+     * @return
+     */
+    @GetMapping( "/findUsers" )
+    public List<User> findUserById(){
+        List<User> users = userService.findUsers();
+        System.out.println( "tk包下的mapper测试通过!" );
+        if ( users == null ){
+            throw new RuntimeException();
+        }
+        return users;
     }
 
 

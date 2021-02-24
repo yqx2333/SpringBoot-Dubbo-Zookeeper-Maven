@@ -12,7 +12,7 @@ import java.util.List;
 // 建立与数据库的连接
 
 @Mapper
-public interface UserMapper {
+public interface UserMapper extends tk.mybatis.mapper.common.Mapper<User> {
 
     /**
      * 查询所有User信息

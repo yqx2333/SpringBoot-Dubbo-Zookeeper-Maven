@@ -15,12 +15,17 @@ public interface UserService {
      */
     User findUser();
 
-
     /**
      * 查询所有User对象并返回
      * @return
      */
     List<User> findUserAll();
+
+    /**
+     * 查询所有User信息并返回
+     * @return
+     */
+    List<User> findUsers();
 
 
 }
