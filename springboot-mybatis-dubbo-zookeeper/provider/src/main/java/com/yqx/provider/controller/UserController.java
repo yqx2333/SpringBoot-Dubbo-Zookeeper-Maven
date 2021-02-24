@@ -38,13 +38,20 @@ public class UserController {
      * @return
      */
     @GetMapping( "/findUsers" )
-    public List<User> findUserById(){
+    public List<User> findUsers(){
         List<User> users = userService.findUsers();
         System.out.println( "tk包下的mapper测试通过!" );
         if ( users == null ){
             throw new RuntimeException();
         }
         return users;
+    }
+
+    @GetMapping( "/findUserById" )
+    public User findUserById(@RequestParam("id")Integer id){
+        User user = userService.findUserById(id);
+        // 返回User数据
+        return user;
     }
 
 

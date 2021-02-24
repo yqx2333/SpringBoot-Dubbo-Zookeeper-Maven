@@ -47,4 +47,20 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectAll();
     }
 
+    /**
+     * 根据UserID查询User对象
+     * @return
+     */
+    @Override
+    public User findUserById( Integer id ) {
+        // 使用selectByPrimaryKey时候 必须在实体类中添加@Id注解 表明主键
+        User user = userMapper.selectByPrimaryKey( id );
+        // 非空判断
+        if ( user == null ){
+            throw new RuntimeException();
+        }
+        // 不为空返回
+        return user;
+    }
+
 }
