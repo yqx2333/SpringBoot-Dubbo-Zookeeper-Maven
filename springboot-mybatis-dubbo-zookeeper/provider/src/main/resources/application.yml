@@ -1,0 +1,57 @@
+server:
+  port: 9997
+  servlet:
+    context-path: /     # 访问路径 如果写上user 那么url访问的时候需要是: localhost:8082/user/xxxx
+
+# 设置Spring依赖
+spring:
+  datasource:    # 数据库连接依赖
+    # name: text    # spring.datasource.name指定数据源名.
+    url: jdbc:mysql://localhost:3306/yqx?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    # 使用Druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource    # 使用Druid数据库连接池
+    dbcp2:
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+      initial-size: 1       # 指定启动连接池时,初始建立的连接数量
+      min-idle:             # 指定必须保持连接的最小值
+      max-wait-millis: 60000  # 最大等待毫秒数 超时提示错误信息
+      time-between-eviction-runs-millis: 60000    # 指定空闲连接检查 废弃连接清空 空间大小调整之间的操作间隔
+      min-evictable-idle-time-millis: 300000      # 指定一个空闲丽娜姐最少空闲多久后 可以被清除
+      validation-query: select 'x'                # 指定获取连接时 连接校验的sql查询语句
+      test-while-idle: true     # 当连接空闲时,是否执行连接测试
+      test-on-borrow: false     # 当从连接池借用连接时 是否测试该连接
+      test-on-return: false     # 在连接归还到连接池时 是否测试该链接
+# 配置MyBatis依赖
+mybatis:
+  type-aliases-package: domain  # 配置扫描包
+# 配置Dubbo
+dubbo:
+  application:
+    name: provider
+  registry:
+    address: zookeeper://localhost:2181
+  scan:
+    base-packages: com.yqx.provider.service.impl
+  protocol:
+    name: dubbo
+    port: 20880
+
+
+
+
+# tomcat:
+#   max-active: 20        # 连接池最大数据库连接数 0表示无限制
+#   initial-size: 1       # 指定启动连接池时,初始建立的连接数量
+#   max-wait: 60000       # 最大等待毫秒数 超时提示错误信息
+#   min-idle: 1           # 指定必须保持连接的最小值
+#   time-between-eviction-runs-millis: 60000
+#   min-evictable-idle-time-millis: 300000
+#   validation-query: select 'x'
+#   test-while-idle: true
+#   test-on-borrow: false
+
+#   test-on-return: false
