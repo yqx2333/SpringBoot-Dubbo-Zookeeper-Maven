@@ -14,7 +14,7 @@ spring:
     # 使用Druid数据源
     # type: com.alibaba.druid.pool.DruidDataSource    # 使用Druid数据库连接池
 
-   dbcp2:
+    dbcp2:
      pool-prepared-statements: true
      max-open-prepared-statements: 20
      initial-size: 1       # 指定启动连接池时,初始建立的连接数量
