@@ -10,7 +10,7 @@
     <!-- 在此文件中配置Dubbo属性 Provider为服务的提供者 所以我们要暴漏UserServiceImpl -->
 
     <!-- 设置dubbo服务名称  服务提供者名称-->
-    <dubbo:application name="provider" />
+    <dubbo:application name="provider" id="provider" />
 
     <!-- 配置注册中心IP地址 -->
     <dubbo:registry address="zookeeper://localhost:2181" />

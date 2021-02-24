@@ -32,8 +32,8 @@ mybatis:
   type-aliases-package: domain  # 配置扫描包
 # 配置Dubbo
 dubbo:
-  application:
-    name: provider
+  # application:
+  #   name: provider
   registry:
     address: zookeeper://localhost:2181
   scan:
