@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 在此文件中配置Dubbo属性 Provider为服务的提供者 所以我们要暴漏UserServiceImpl -->
+
+    <!-- 设置dubbo服务名称  服务提供者名称-->
+    <dubbo:application name="provider" />
+
+    <!-- 配置注册中心IP地址 -->
+    <dubbo:registry address="zookeeper://localhost:2181" />
+
+    <!-- 配置包扫描路径,多个包用逗号分隔,不填package代表扫描当前ApplicationContext中所有的包 -->
+    <dubbo:annotation package="com.yqx.provider.service.impl" />
+
+    <!-- 设置通信方式和通信端口 Dubbo通信方式 通信端口为20880 -->
+    <dubbo:protocol name="dubbo" port="20880" />
+
+    <!-- 暴漏Service服务,让别人调用 ref指向服务真正的实现对象 也就是相应的实现类-->
+    <dubbo:service ref="userServiceImpl" interface="com.yqx.common.service.UserService" />
+
+    <!-- 将UserService的实现对象添加到IOC容器中 -->
+    <bean id="userServiceImpl" class="com.yqx.provider.service.impl.UserServiceImpl" />
+
+</beans>
