@@ -27,5 +27,11 @@ public interface UserService {
      */
     List<User> findUsers();
 
+    /**
+     * 根据ID查询User对象
+     * @return
+     */
+    User findUserById( Integer id );
+
 
 }
