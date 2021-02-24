@@ -1,18 +1,19 @@
 package com.yqx.provider.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.yqx.common.domin.User;
 import com.yqx.common.service.UserService;
 import com.yqx.provider.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 // 在provider 服务提供者中创建UserServiceImpl接口
 // 进行业务逻辑判断
-@Service(version = "1.0.0")       // Dubbo家用Service
-@Component      // Spring家用Component
+// @Service(version = "1.0.0")       // Dubbo家用Service
+// @Component      // Spring家用Component
+
 public class UserServiceImpl implements UserService {
 
     @Autowired
