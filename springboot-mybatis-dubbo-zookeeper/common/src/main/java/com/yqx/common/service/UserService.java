@@ -15,11 +15,6 @@ public interface UserService {
      */
     User findUser();
 
-    /**
-     * 根据UserID查询User对象
-     * @return
-     */
-    User findUserById(Integer id);
 
     /**
      * 查询所有User对象并返回

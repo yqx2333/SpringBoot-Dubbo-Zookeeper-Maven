@@ -21,12 +21,6 @@ public class UserController {
         return user;
     }
 
-    @GetMapping( "/user/findUserById" )
-    public User findUserById(@RequestParam("id")Integer id){
-        // 调用方法 查询数据
-        User user = userService.findUserById(id);
-        return user;
-    }
 
     @RequestMapping( "/user/findUserAll" )
     public List<User> findUserAll(){
