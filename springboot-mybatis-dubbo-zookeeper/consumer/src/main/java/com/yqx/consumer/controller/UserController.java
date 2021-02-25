@@ -76,5 +76,16 @@ public class UserController {
         return user;
     }
 
+    /**
+     * 根据传入的User信息 添加User对象到数据库中
+     * @param user
+     * @return
+     */
+    @GetMapping( "/redis/saveUser" )
+    public Integer saveUser( User user ){
+        int i = userService.saveUser(user);
+        return i;
+    }
+
 
 }
