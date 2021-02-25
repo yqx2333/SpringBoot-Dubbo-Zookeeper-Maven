@@ -19,13 +19,13 @@ public interface UserMapper extends tk.mybatis.mapper.common.Mapper<User> {
      * column为数据库字段名，porperty为实体类属性名 id为是否为主键
      * @return
      */
-    @Results(id = "userMap",value = {
+    /*@Results(id = "userMap",value = {
             @Result(column = "id",property = "id"),
             @Result(column = "name",property = "name"),
             @Result(column = "age",property = "age"),
             @Result(column = "sex",property = "sex")
     })
-    @Select( "SELECT * FROM user" )
+    @Select( "SELECT * FROM user" )*/
     List<User> findUserAll();
 
 }
