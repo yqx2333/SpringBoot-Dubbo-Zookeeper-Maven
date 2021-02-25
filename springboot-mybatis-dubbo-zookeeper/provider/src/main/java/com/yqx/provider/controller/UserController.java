@@ -2,6 +2,8 @@ package com.yqx.provider.controller;
 
 import com.yqx.common.domin.User;
 import com.yqx.common.service.UserService;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +17,6 @@ public class UserController {
     @Autowired
     public UserService userService;
 
-    // 测试方法 测试成功
-    @GetMapping( "/text" )
-    public User findUser(){
-        User user = userService.findUser();
-        return user;
-    }
 
     /**
      * 连接数据库 查询User表中所有的信息
@@ -74,6 +70,17 @@ public class UserController {
             throw new RuntimeException();
         }
         return user;
+    }
+
+    /**
+     * 根据传入的User信息 添加User对象到数据库中
+     * @param user
+     * @return
+     */
+    @GetMapping( "/redis/saveUser" )
+    public Integer saveUser( User user ){
+        int i = userService.saveUser(user);
+        return i;
     }
 
 

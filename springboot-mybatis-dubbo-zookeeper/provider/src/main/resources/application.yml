@@ -45,7 +45,7 @@ spring:
         max-idle: 8     # Redis连接池中最大空闲连接
         min-idle: 0     # Redis连接池中最小空闲连接
     # Redis连接超时时间(毫秒)
-    timeout: 0
+    timeout: 5000
 
 # 配置MyBatis依赖
 mybatis:
