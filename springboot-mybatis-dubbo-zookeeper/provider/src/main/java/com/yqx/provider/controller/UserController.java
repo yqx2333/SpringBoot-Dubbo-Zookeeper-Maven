@@ -55,4 +55,26 @@ public class UserController {
     }
 
 
+    // ------------------------------------------------------------------
+    // ------------------------------------------------------------------
+    // --------------------------Redis实现CRUD----------------------------
+    // ------------------------------------------------------------------
+    // ------------------------------------------------------------------
+
+    /**
+     * 测试Redis  根据UserID查询User对象
+     * @param id
+     * @return
+     */
+    @GetMapping( "/redis/getUserById" )
+    public User getUserById( @RequestParam("id")Integer id ){
+        // 根据ID查询User
+        User user = userService.getUserById(id);
+        if ( user == null ){
+            throw new RuntimeException();
+        }
+        return user;
+    }
+
+
 }

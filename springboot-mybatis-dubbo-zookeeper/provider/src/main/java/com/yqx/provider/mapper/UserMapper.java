@@ -28,4 +28,39 @@ public interface UserMapper extends tk.mybatis.mapper.common.Mapper<User> {
     @Select( "SELECT * FROM user" )*/
     List<User> findUserAll();
 
+
+    // ------------------------------------------------------------------
+    // ------------------------------------------------------------------
+    // --------------------------Redis实现CRUD----------------------------
+    // ------------------------------------------------------------------
+    // ------------------------------------------------------------------
+
+    /**
+     * 根据用户Id 查询单个User对象
+     * @param id
+     * @return
+     */
+    User getUserById( Integer id );
+
+    /**
+     * 根据传入的User对象 添加User信息到数据库
+     * @param user
+     * @return
+     */
+    int saveUser( User user );
+
+    /**
+     * 根据传入的UserId 删除单个User对象
+     * @param id
+     * @return
+     */
+    int deleteUser( Integer id );
+
+    /**
+     * 根据传入的User对象 修改User信息
+     * @param user
+     * @return
+     */
+    int updateUser( User user );
+
 }
