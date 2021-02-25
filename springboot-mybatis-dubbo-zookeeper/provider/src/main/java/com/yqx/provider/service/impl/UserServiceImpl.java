@@ -86,7 +86,8 @@ public class UserServiceImpl implements UserService {
     // 如果缓存不存在 则从DB中获取信息 再插入缓存
 
     /**
-     * 测试Redis  根据UserID查询User对象    本地测试成功!
+     * 测试Redis  根据UserID查询User对象
+     * 本地测试成功! Redis缓存成功! 远程调用成功!
      * @param id
      * @return
      */
@@ -96,24 +97,19 @@ public class UserServiceImpl implements UserService {
         // 设置Redis事务关闭
         redisTemplate.setEnableTransactionSupport( false );
 
-        //从缓存中获取城市信息
+        // 设置key信息
         String key = "user_"+id;
         ValueOperations<String,User> operations = redisTemplate.opsForValue();
-
 
         //缓存存在
         boolean hasKey = redisTemplate.hasKey(key);
         User u = operations.get(key);
         System.out.println("是否有缓存："+hasKey+"  缓存中的值是："+u);
-
-        // 数据是否存在于缓存中
         if(hasKey){
-            // 如果存在 记录日志 直接返回User对象
-            LOGGER.info("UserImpl.updateUser() : 从缓存中获取了user >> " + u.toString());
-            return u;
+            User user = operations.get(key);
+            LOGGER.info("UserImpl.updateUser() : 从缓存中获取了user >> " + user.toString());
+            return user;
         }
-
-        // 如果不存在 则去数据库中查询数据
         //从数据库中获取user数据
         User user = userMapper.getUserById(id);
 
@@ -123,18 +119,23 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-
-
-
-
-
-
-
-
-
+    /**
+     * 根据User对象 保存User信息
+     * 添加保存不需要进行Redis缓存 直接添加即可
+     * @param user
+     * @return
+     */
     @Override
     public int saveUser(User user) {
-        return 0;
+
+        // 先进行判断 如果传入的User对象为空该怎么办?
+        if ( user == null ){
+            LOGGER.info( "增加User对象时,传入的User对象为空!" + user );
+            throw new RuntimeException();
+        }
+        // 不为空则进行添加
+        int i = userMapper.saveUser(user);
+        return i;
     }
 
     @Override
