@@ -105,6 +105,26 @@
             <version>2.0.2</version>
         </dependency>
 
+        <!-- 添加Redis依赖 2.4.3 -->
+        <!-- redis依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+        </dependency>
+
+        <!-- Spring应用通过简单配置访问redis服务 对redis地城的Jedis进行封装
+             RedisTemplate提供了Redis的各种操作 异常处理及序列化 支持发布订阅等 -->
+        <!--<dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>2.0.8.RELEASE</version>
+        </dependency>-->
+
     </dependencies>
 
     <build>
