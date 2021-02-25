@@ -32,6 +32,7 @@ spring:
 # 配置MyBatis依赖
 mybatis:
   type-aliases-package: domain  # 配置扫描包
+  mapper-locations: classpath:UserMapper.xml
 # 配置Dubbo
 dubbo:
   # application:

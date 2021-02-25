@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 @RestController // 返回Json字符串
@@ -40,6 +41,17 @@ public class UserController {
         User user = userService.findUserById(id);
         // 返回User数据
         return user;
+    }
+
+    @GetMapping( "/findUserAll" )
+    public List<User> findUserAll(){
+        List<User> userAll = userService.findUserAll();
+
+        if (userAll==null){
+            throw new RuntimeException();
+        }
+
+        return userAll;
     }
 
 
