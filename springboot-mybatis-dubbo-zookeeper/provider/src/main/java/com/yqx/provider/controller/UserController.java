@@ -83,5 +83,31 @@ public class UserController {
         return i;
     }
 
+    /**
+     * 根据传入的User对象 修改User信息
+     * 并判断该User对象是否存在于Redis缓存中
+     * 如果存在 则将Redis缓存删除 下一次查询的时候先从数据库中查询
+     * 如果不存在 则不做任何操作
+     * @param user
+     * @return
+     */
+    @RequestMapping( "/redis/updateUser" )
+    public Integer updateUser( User user ){
+        int updateNum = userService.updateUser(user);
+        return updateNum;
+    }
+
+    /**
+     * 根据传入的ID 删除对应的User对象
+     * @param id
+     * @return
+     */
+    @RequestMapping( "/redis/delete" )
+    public Integer deleteUser(@RequestParam("id") Integer id ){
+        // 进行删除操作
+        int delete = userService.deleteUser(id);
+        return delete;
+    }
+
 
 }
