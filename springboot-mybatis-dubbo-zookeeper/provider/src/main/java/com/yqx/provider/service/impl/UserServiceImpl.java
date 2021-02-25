@@ -189,7 +189,7 @@ public class UserServiceImpl implements UserService {
         }
 
         // 传入正确参数时 进行删除操作
-        int delete = userMapper.deleteByPrimaryKey(id);
+        int delete = userMapper.deleteUser(id);
 
         // 获取key对象
         String key = "user_" + id;
