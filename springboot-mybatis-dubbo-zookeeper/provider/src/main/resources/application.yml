@@ -12,7 +12,7 @@ spring:
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     # 使用Druid数据源
-    # type: com.alibaba.druid.pool.DruidDataSource    # 使用Druid数据库连接池
+    type: com.alibaba.druid.pool.DruidDataSource    # 使用Druid数据库连接池
 
     dbcp2:
      pool-prepared-statements: true
