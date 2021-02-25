@@ -138,17 +138,81 @@ public class UserServiceImpl implements UserService {
         return i;
     }
 
-    @Override
-    public int deleteUser(Integer id) {
-        return 0;
-    }
-
+    /**
+     * 根据传入的User对象 修改信息 修改信息之后修改Redis中的内容
+     * 如果缓存存在,则从缓存中删除User信息
+     * 如果缓存不存在 不做任何操作
+     * @param user
+     * @return
+     */
     @Override
     public int updateUser(User user) {
-        return 0;
+
+        // 先判断传入的User对象是否为空
+        if ( user == null ){
+            // 如果传入的User为空 直接报错
+            throw new RuntimeException();
+        }
+
+        // 如果不为空 则修改数据
+        int update = userMapper.updateUser(user);
+
+        // 设置key值   key值设置为: user_id
+        String key = "user_" + user.getId();
+        // 判断该key值是否在缓存中存在
+        Boolean hasKey = redisTemplate.hasKey(key);
+
+        // 如果存在
+        if ( hasKey ){
+            // 将该key和对应的value删除
+            redisTemplate.delete( key );
+            // 记录日志
+            LOGGER.info("UserImmpl.updateUser() : 从缓存中删除user >> " + user.toString());
+        }
+        
+        // 如果该key不存在于Redis缓存中 则不做任何操作
+        return update;
     }
 
+    /**
+     * 根据传入的UserID 删除该User对象
+     * @param id
+     * @return
+     */
+    @Override
+    public int deleteUser(Integer id) {
 
+        // 判断传入的id是否为空
+        if ( id == 0 || id == null ){
+            // 如果传入的参数为空 则报错
+            throw new RuntimeException();
+        }
+
+        // 传入正确参数时 进行删除操作
+        int delete = userMapper.deleteUser(id);
+
+        // 获取key对象
+        String key = "user_" + id;
+        System.out.println( "key" + key + "-------------------------" );
+
+        // 判断该key是否存在于Redis缓存中
+        Boolean hasKey = redisTemplate.hasKey(key);
+        ValueOperations<String, User> operations = redisTemplate.opsForValue();
+        // 根据key 获取对应的Uesr对象
+        User user = operations.get(key);
+        // 控制台打印输出
+        System.out.println("是否有缓存："+hasKey+"  缓存中的值是："+user);
+
+        // 进行判断
+        if ( hasKey ){
+            // 如果该key在Redis缓存中存在 记录日志并删除对应的key-value键值对
+            LOGGER.info("UserImmpl.updateUser() : 从缓存中删除user >> " + operations.get(key));
+            redisTemplate.delete( key );
+        }
+
+        // 如果该对应的key不存在于Redis缓存中 则不做任何操作
+        return delete;
+    }
 
 
 
