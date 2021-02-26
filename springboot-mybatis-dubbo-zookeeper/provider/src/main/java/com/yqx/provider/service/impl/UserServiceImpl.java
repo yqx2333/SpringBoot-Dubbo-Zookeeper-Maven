@@ -20,10 +20,9 @@ import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 public class UserServiceImpl implements UserService {
 
+    // 注入Redis
     @Resource
     private RedisTemplate<String,User> redisTemplate;
-
-
 
     @Autowired
     private UserMapper userMapper;
