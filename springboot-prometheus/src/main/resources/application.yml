@@ -1,0 +1,17 @@
+# 设置端口号
+server:
+  port: 8081
+
+# SpirngBoot配置
+spring:
+  application:
+    name: springboot-prometheus   # 设置项目名称
+# 普罗米修斯配置
+management:
+  endpoints:
+    web:
+      exposure:   # 暴漏prometheus的接口
+        include: 'prometheus'
+  metrics:
+    tags:         # 暴漏metrics.tags 和 spring.application.name保持一致
+      application: ${spring.application.name}
