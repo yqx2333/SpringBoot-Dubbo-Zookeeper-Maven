@@ -1,17 +1,17 @@
-# ÉèÖÃ¶Ë¿ÚºÅ
+# è®¾ç½®ç«¯å£å·
 server:
   port: 8081
 
-# SpirngBootÅäÖÃ
+# SpirngBooté…ç½®
 spring:
   application:
-    name: springboot-prometheus   # ÉèÖÃÏîÄ¿Ãû³Æ
-# ÆÕÂŞÃ×ĞŞË¹ÅäÖÃ
+    name: springboot-prometheus   # è®¾ç½®é¡¹ç›®åç§°
+# æ™®ç½—ç±³ä¿®æ–¯é…ç½®
 management:
   endpoints:
     web:
-      exposure:   # ±©Â©prometheusµÄ½Ó¿Ú
+      exposure:   # æš´æ¼prometheusçš„æ¥å£
         include: 'prometheus'
   metrics:
-    tags:         # ±©Â©metrics.tags ºÍ spring.application.name±£³ÖÒ»ÖÂ
+    tags:         # æš´æ¼metrics.tags å’Œ spring.application.nameä¿æŒä¸€è‡´
       application: ${spring.application.name}

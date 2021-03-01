@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- 添加UserMapper地址 -->
+<!-- 将Sql语句全部写到 xml文件中进行保存 测试findUserAll成功
+     其他方法使用时会报错 因为未添加SQL语句 -->
+<mapper namespace="com.yqx.provider.mapper.UserMapper">
+
+    <!-- 创建ResultMap type为实体类对象
+            column为数据库字段 property为别名 jdbcType为数据库字段类型 -->
+    <resultMap id="BaseResultMap" type="com.yqx.common.domin.User">
+        <result column="userId" property="userId" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 编写sql字段 这样以后可以查询指定字段 -->
+    <sql id="Base_Column_List">
+        id
+        ,name,age,sex
+    </sql>
+
+    <!-- 查询所有测试 -->
+    <select id="findUserAll" resultMap="BaseResultMap" parameterType="com.sun.tools.javac.util.List">
+        SELECT *
+        FROM user
+    </select>
+
+    <!-- Redis实现CRUD -->
+    <!-- Redis实现CRUD -->
+    <!-- Redis实现CRUD -->
+
+
+    <!-- 1. 根据传入的UserId 查询单条User信息
+         resultMap="BaseResultMap" :   代表返回的是User对象
+         parameterType="java.lang.Integer":  代表传入的参数是Integer类型-->
+    <select id="getUserById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from user u
+        where u.id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <!-- 2. 根据传入的User对象 添加User信息
+            parameterType="com.yqx.common.domin.User 传入的参数为User对象
+
+            trim:
+                prefix: 在trim标签内为sql语句加上前缀
+                suffix: 在trim标签内为sql语句加上后缀
+                suffixOverrides: 指定去除多余的后最内容
+                prefixOverrides: 指定去除多余的前缀内容 -->
+    <insert id="saveUser" parameterType="com.yqx.common.domin.User">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null">
+                id,
+            </if>
+            <if test="name!=null">
+                name,
+            </if>
+            <if test="age!=null">
+                age,
+            </if>
+            <if test="sex!=null">
+                sex,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="id!=null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null" >
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="sex != null" >
+                #{sex,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 3. 修改操作 -->
+    <update id="updateUser" parameterType="com.yqx.common.domin.User">
+        UPDATE user
+        SET
+        <if test="name!=null">
+            name = #{name},
+        </if>
+        <if test="age!=null">
+            age = #{age},
+        </if>
+        <if test="sex!=null">
+            sex = #{sex}
+        </if>
+        WHERE
+        id = #{id}
+    </update>
+
+    <!-- 4. 删除操作 -->
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from
+            user
+        where
+            id = #{id}
+    </delete>
+
+
+</mapper>

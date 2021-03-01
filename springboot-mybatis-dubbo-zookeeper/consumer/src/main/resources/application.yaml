@@ -2,8 +2,8 @@ server:
   port: 9998
 
 spring:
-  datasource:    # Êı¾İ¿âÁ¬½ÓÒÀÀµ
-    # name: text    # spring.datasource.nameÖ¸¶¨Êı¾İÔ´Ãû.
+  datasource:    # æ•°æ®åº“è¿æ¥ä¾èµ–
+    # name: text    # spring.datasource.nameæŒ‡å®šæ•°æ®æºå.
     url: jdbc:mysql://localhost:3306/yqx?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
     password: root
