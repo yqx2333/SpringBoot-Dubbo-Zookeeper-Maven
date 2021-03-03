@@ -2,7 +2,7 @@
 server:
   port: 8081
 
-# SpirngBoot配置
+# SpringBoot配置
 spring:
   application:
     name: springboot-prometheus   # 设置项目名称
